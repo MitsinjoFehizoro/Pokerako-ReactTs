@@ -1,16 +1,18 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import './sass/base/_color.scss';
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: signika;
+  font-family: Signika;
 }
 
 body {
-  color: $black-color;
+  color: $gray-color;
+
   &::-webkit-scrollbar {
     width: 5px;
   }
@@ -28,12 +30,4 @@ body {
       scrollbar-color: $primary-color transparent;
     }
   }
-}
-
-.fond{
-  background: linear-gradient(transparent ,#F7941F 95%);
-}
-.koa{
-  -webkit-text-stroke: 2px white;
-  color: transparent;
 }
