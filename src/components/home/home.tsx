@@ -4,7 +4,7 @@ import { titleH4 } from "../../tools/tailwind";
 
 export const Home: FunctionComponent = () => {
     return (
-        <section className="w-full h-[75vh] flex flex-col justify-end items-center">
+        <section className="w-full h-[78vh] flex flex-col justify-end items-center">
             <h4 className={titleH4}>
                 <span className="text-primary">poker</span>
                 <span>ako</span>

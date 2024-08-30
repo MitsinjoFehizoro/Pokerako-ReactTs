@@ -7,7 +7,7 @@ import { WhyUsCard } from "./why-us-card";
 
 export const WhyUs: FunctionComponent = () => {
     return (
-        <section className="mt-20">
+        <section className="mt-14">
             <h4 className={`${titleH4} mb-8`}>
                 <span className="text-primary">ce qui nous </span>
                 <span>différencie.</span>
