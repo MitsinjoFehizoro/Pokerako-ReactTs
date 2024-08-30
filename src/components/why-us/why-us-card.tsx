@@ -7,7 +7,7 @@ type Props = {
 }
 export const WhyUsCard: FunctionComponent<Props> = ({ title, description, picture }) => {
     return (
-        <div className="w-80 h-80 p-8 bg-secondary">
+        <div className="w-80 h-80 p-8 mb-8 bg-secondary">
             <div className="w-20 h-20 mb-4 overflow-hidden">
                 <img src={picture} className="w-20 h-20 " />
             </div>
