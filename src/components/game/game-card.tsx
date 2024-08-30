@@ -1,4 +1,5 @@
 import { FunctionComponent } from "react";
+import { customBorder } from "../../tools/tailwind";
 
 
 type Props = {
@@ -7,7 +8,7 @@ type Props = {
 }
 export const GameCard: FunctionComponent<Props> = ({ gameName, picture }) => {
     return (
-        <div className="w-80 relative flex p-4 pt-8 mb-8 bg-background rounded-md border-[1px] border-gray/10">
+        <div className={`${customBorder} w-80 relative flex p-4 pt-8 mb-8 bg-background rounded-md`}>
             <div className="py-1 px-4 absolute top-[-1em] left-4 rounded-xl text-white text-sm bg-primary border-x-8 border-background">Texas Hold'em</div>
             <img src={picture} className="w-20 h-20" />
             <div className="ml-4 w-full">
