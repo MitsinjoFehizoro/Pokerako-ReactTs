@@ -21,3 +21,14 @@ export const CustomLinkWhite: FunctionComponent<Props> = ({ text, road, isBorder
         </NavLink>
     )
 }
+
+
+export const CustomLinkConnexion: FunctionComponent<Props> = ({ text, road }) => {
+
+    return (
+        <div className="flex items-center justify-center mt-4">
+            <div className='absolute w-full h-[1px] bg-gray/10 ' />
+            <NavLink to={road} className='text-sm px-4 hover:text-white bg-background z-10'>{text}</NavLink>
+        </div>
+    )
+}

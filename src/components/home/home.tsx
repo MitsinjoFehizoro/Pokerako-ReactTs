@@ -13,8 +13,7 @@ export const Home: FunctionComponent = () => {
                 <p className="mb-[-.4em]">Une plateforme</p>
                 <p> en ligne pour jouer au Poker</p>
             </h1>
-            <h6 className="tex
-            t-lg">Misez avec Pokerako, défiez la chance et repartez gagnant !"</h6>
+            <h6 className="text-lg">Misez avec Pokerako, défiez la chance et repartez gagnant !"</h6>
             <div className="flex mt-8">
                 <div className="w-44">
                     <CustomLinkWhite road='' text="se connecter" isBorder={true} />

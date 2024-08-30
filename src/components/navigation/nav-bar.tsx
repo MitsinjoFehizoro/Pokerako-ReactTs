@@ -18,10 +18,10 @@ export const NavBar: FunctionComponent = () => {
             </div>
             <div className="flex">
                 <div className="w-40">
-                    <CustomLinkWhite text="se connecter" road="" />
+                    <CustomLinkWhite text="se connecter" road="/login" />
                 </div>
                 <div className="w-32">
-                    <CustomLinkRed text="s'inscrire" road="" />
+                    <CustomLinkRed text="s'inscrire" road="/signup" />
                 </div>
             </div>
         </nav>
