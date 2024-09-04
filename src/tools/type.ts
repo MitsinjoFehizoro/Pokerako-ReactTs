@@ -10,3 +10,8 @@ export type field = {
     value: string,
     errorMessage: string
 }
+
+export type toast = {
+    toast: string,
+    type: string
+}

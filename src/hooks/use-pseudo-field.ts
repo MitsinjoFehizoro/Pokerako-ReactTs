@@ -9,16 +9,16 @@ export const usePseudoField = () => {
         errorMessage: ''
     })
 
-    const hanldePseudoField = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handlePseudoField = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (regexPseudo.test(e.target.value)) {
             setPseudoField({ isValid: true, value: e.target.value, errorMessage: '' })
         } else {
-            const errorMessage = 'Le pseudo doit contenir 3 à 15 sans aucun caractère spécial.'
+            const errorMessage = 'Entre 3 à 20 sans aucun caractère spécial.'
             setPseudoField({ isValid: false, value: e.target.value, errorMessage: errorMessage })
         }
     }
     return {
         pseudoField,
-        hanldePseudoField
+        handlePseudoField
     }
 }

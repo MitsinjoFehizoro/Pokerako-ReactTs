@@ -2,14 +2,14 @@ import React, { useState } from "react"
 import { field } from "../tools/type"
 import { regexPassword } from "../tools/regex"
 
-export const usePseudoField = () => {
+export const usePasswordField = () => {
     const [passwordField, setPasswordField] = useState<field>({
         isValid: false,
         value: '',
         errorMessage: ''
     })
 
-    const hanldePasswordField = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handlePasswordField = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (regexPassword.test(e.target.value)) {
             setPasswordField({ isValid: true, value: e.target.value, errorMessage: '' })
         } else {
@@ -19,6 +19,6 @@ export const usePseudoField = () => {
     }
     return {
         passwordField,
-        hanldePasswordField
+        handlePasswordField
     }
 }

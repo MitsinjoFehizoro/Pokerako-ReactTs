@@ -11,7 +11,6 @@ export const CustomButton: FunctionComponent<Props> = ({ text, isLoading }) => {
             {
                 isLoading ? (
                     <p className="animateRotation w-5 h-5 rounded-full border-transparent border-l-primary border-r-primary border-4" />
-
                 ) : (
                     <span>{text}</span>
                 )
