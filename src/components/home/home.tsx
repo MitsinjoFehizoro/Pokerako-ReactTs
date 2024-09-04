@@ -1,5 +1,5 @@
 import { FunctionComponent } from "react";
-import { CustomLinkRed, CustomLinkWhite } from "../form/CustomLink";
+import { CustomLinkRed, CustomLinkWhite } from "../form/custom-link";
 import { titleH4 } from "../../tools/tailwind";
 
 export const Home: FunctionComponent = () => {

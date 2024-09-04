@@ -1,11 +1,16 @@
-import { FunctionComponent, useId, useState } from "react";
+import React, { FunctionComponent, useId, useState } from "react";
 import { customBorder } from "../../tools/tailwind";
+import { field } from "../../tools/type";
 
 type Props = {
+    type: string,
+    name: string,
+    field: field,
+    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
     fontawesome: string
     placeholder: string
 }
-export const CustomInput: FunctionComponent<Props> = ({ fontawesome, placeholder }) => {
+export const CustomInput: FunctionComponent<Props> = ({ type, name, field, onChange, fontawesome, placeholder }) => {
     const id = useId()
     const [isActive, setIsActive] = useState(false)
 
@@ -17,15 +22,21 @@ export const CustomInput: FunctionComponent<Props> = ({ fontawesome, placeholder
                 </p>
                 <input
                     className={`${customBorder} ${isActive ? 'text-white pl-14' : 'text-gray pl-12'} w-full h-10 flex items-center pr-4 text-sm outline-none rounded-full bg-transparent`}
-                    type="text"
-                    name=""
+                    type={type}
+                    name={name}
+                    value={field.value}
+                    onChange={onChange}
                     id={id}
                     placeholder={placeholder}
                     onFocus={() => setIsActive(true)}
                     onBlur={() => setIsActive(false)}
                 />
             </div>
-            {/* <p className="text-xs text-primary pt-1 px-4">Email invalide.</p> */}
+            {
+                !field.isValid && (
+                    <p className="text-xs text-primary pt-1 px-4">{field.errorMessage}</p>
+                )
+            }
         </div>
 
 

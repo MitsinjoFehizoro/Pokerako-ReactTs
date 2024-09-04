@@ -1,8 +1,8 @@
 import { BaseConnexion } from '../components/connexion/base-connexion';
 import { FunctionComponent } from "react";
-import { CustomInput } from '../components/form/CustomInput';
-import { CustomButton } from '../components/form/CustomButton';
-import { CustomLinkConnexion } from '../components/form/CustomLink';
+import { CustomInput } from '../components/form/custom-input';
+import { CustomButton } from '../components/form/custom-button';
+import { CustomLinkConnexion } from '../components/form/custom-link';
 import { NavLink } from 'react-router-dom';
 
 export const LoginPage: FunctionComponent = () => {

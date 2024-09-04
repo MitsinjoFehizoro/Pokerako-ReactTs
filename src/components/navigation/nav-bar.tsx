@@ -1,6 +1,6 @@
 import { FunctionComponent } from "react";
 import { NavLink } from "react-router-dom";
-import { CustomLinkRed, CustomLinkWhite } from "../form/CustomLink";
+import { CustomLinkRed, CustomLinkWhite } from "../form/custom-link";
 import { LogoRow } from "./logo";
 
 export const NavBar: FunctionComponent = () => {

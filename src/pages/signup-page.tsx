@@ -1,8 +1,8 @@
 import { FunctionComponent } from "react";
 import { BaseConnexion } from "../components/connexion/base-connexion";
-import { CustomInput } from "../components/form/CustomInput";
-import { CustomButton } from "../components/form/CustomButton";
-import { CustomLinkConnexion } from "../components/form/CustomLink";
+import { CustomInput } from "../components/form/custom-input";
+import { CustomButton } from "../components/form/custom-button";
+import { CustomLinkConnexion } from "../components/form/custom-link";
 
 export const SignUpPage: FunctionComponent = () => {
     return (
@@ -12,7 +12,7 @@ export const SignUpPage: FunctionComponent = () => {
                 <CustomInput fontawesome="fa fa-user" placeholder="Pseudo" />
                 <CustomInput fontawesome="fa fa-lock" placeholder="Mot de passe" />
                 <CustomInput fontawesome="fa fa-unlock" placeholder="Confirmer le mot de passe" />
-                <CustomButton text="s'inscrire" />
+                <CustomButton text="s'inscrire" isLoading={false} />
                 <CustomLinkConnexion text="Se connecter" road="/login" />
             </form>
         </BaseConnexion>
