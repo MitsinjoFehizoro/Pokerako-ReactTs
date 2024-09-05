@@ -1,0 +1,33 @@
+@import '../base/color';
+
+.success {
+    border-color: $success-color;
+
+    .icon {
+        color: $success-color;
+    }
+}
+
+.warning {
+    border-color: $warning-color;
+
+    .icon {
+        color: $warning-color;
+    }
+}
+
+.info {
+    border-color: $info-color;
+
+    .icon {
+        color: $info-color;
+    }
+}
+
+.error {
+    border-color: $error-color;
+
+    .icon {
+        color: $error-color;
+    }
+}

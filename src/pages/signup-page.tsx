@@ -7,7 +7,7 @@ import { usePhoneField } from "../hooks/use-phone-field";
 import { usePseudoField } from "../hooks/use-pseudo-field";
 import { usePasswordField } from "../hooks/use-password-field";
 import { useConfirmPasswordField } from "../hooks/use-confirm-password-field";
-import { useToast } from "../hooks/use-toast";
+import { useSignup } from "../api/users/user-api";
 
 export const SignUpPage: FunctionComponent = () => {
     const { phoneField, handlePhoneField } = usePhoneField()
@@ -15,10 +15,10 @@ export const SignUpPage: FunctionComponent = () => {
     const { passwordField, handlePasswordField } = usePasswordField()
     const { confirmPasswordField, handleConfirmPasswordField } = useConfirmPasswordField()
 
-    const { addToast } = useToast()
+    const { stateSignup, signup } = useSignup()
     const onSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
         e.preventDefault()
-        addToast({ toast: 'Toast de teste de pokerako', type: 'error' })
+        signup(phoneField, pseudoField, passwordField, confirmPasswordField)
     }
     return (
         <BaseConnexion title="s'inscrire" >
@@ -52,7 +52,7 @@ export const SignUpPage: FunctionComponent = () => {
                     onChange={(e) => handleConfirmPasswordField(e, passwordField.value)}
                     fontawesome="fa fa-unlock"
                     placeholder="Confirmer le mot de passe" />
-                <CustomButton text="s'inscrire" isLoading={false} />
+                <CustomButton text="s'inscrire" isLoading={stateSignup.isLoading} />
                 <CustomLinkConnexion text="Se connecter" road="/login" />
             </form>
         </BaseConnexion>

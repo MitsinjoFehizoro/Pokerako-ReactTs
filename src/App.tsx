@@ -4,12 +4,11 @@ import { HomePage } from './pages/home-page'
 import { SignUpPage } from './pages/signup-page'
 import { LoginPage } from './pages/login-page'
 
-
 const route = createBrowserRouter([
   {
     path: '',
     element: <Root />,
-    children: [
+    children: [ 
       {
         path: '',
         element: <HomePage />
