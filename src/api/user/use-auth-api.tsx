@@ -42,13 +42,13 @@ export const useAuth = () => {
         }
         try {
             setStateAuth({ isLoading: true, message: null, data: null, errorMessage: null })
-            const response = await axios.post(`${import.meta.env.BASE_URL}login`, { phone: phoneField.value, password: passwordField.value })
+            const response = await axios.post(`${import.meta.env.VITE_BASE_URL}login`, { phone: phoneField.value, password: passwordField.value })
             localStorage.setItem('token', response.data.token)
             setIsAuth(true)
-            setUser(response.data.user)
-            addToast({ toast: `Bonjour ${user?.pseudo}.`, type: 'success' })
+            setUser(response.data.data)
             setStateAuth({ isLoading: false, message: response.data.message, data: response.data.data, errorMessage: null })
-            const from = location.state.from || '/'
+            addToast({ toast: response.data.message, type: 'success' })
+            const from = location.state?.from || '/'
             if (from !== '/login' && from !== '/signup') navigate(from)
         } catch (error) {
             handleError(error, setStateAuth, addToast)
