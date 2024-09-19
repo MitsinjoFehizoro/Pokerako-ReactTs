@@ -7,7 +7,7 @@ import { usePhoneField } from "../hooks/use-phone-field";
 import { usePseudoField } from "../hooks/use-pseudo-field";
 import { usePasswordField } from "../hooks/use-password-field";
 import { useConfirmPasswordField } from "../hooks/use-confirm-password-field";
-import { useSignup } from "../api/users/user-api";
+import { useSignup } from "../api/user/use-signup-api";
 
 export const SignUpPage: FunctionComponent = () => {
     const { phoneField, handlePhoneField } = usePhoneField()
