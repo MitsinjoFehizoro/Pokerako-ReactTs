@@ -1,69 +1,78 @@
 import { createContext, FunctionComponent, PropsWithChildren, useContext, useState } from "react";
 import { User } from "../../models/user-model";
 import { field, stateAxios } from "../../tools/type";
-import { useToast } from "../../hooks/use-toast";
-import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { handleError } from "../../tools/handle-error";
+import { useToast } from "../../hooks/use-toast";
+import { useLocation, useNavigate } from "react-router-dom";
 
-interface AuthContextInterface {
+interface authContext {
     isAuth: boolean,
     setIsAuth: (b: boolean) => void,
-    user: User | undefined,
-    setUser: (user: User | undefined) => void,
     stateAuth: stateAxios,
-    setStateAuth: (s: stateAxios) => void
+    setStateAuth: (s: stateAxios) => void,
+    userConnected: User | undefined,
+    setUserConnected: (u: User | undefined) => void
 }
 
-const Authcontext = createContext<AuthContextInterface>({
+const AuthContext = createContext<authContext>({
     isAuth: false,
     setIsAuth: () => { },
-    user: undefined,
-    setUser: () => { },
     stateAuth: {
-        isLoading: false,
-        message: null,
-        data: null,
-        errorMessage: null
+        isLoading: false, message: null, data: null
     },
-    setStateAuth: () => { }
+    setStateAuth: () => { },
+    userConnected: undefined,
+    setUserConnected: () => { }
 })
 
 export const useAuth = () => {
-    const { isAuth, setIsAuth, user, setUser, stateAuth, setStateAuth } = useContext(Authcontext)
+    const { isAuth, setIsAuth, stateAuth, setStateAuth, userConnected, setUserConnected } = useContext(AuthContext)
 
     const { addToast } = useToast()
     const navigate = useNavigate()
     const location = useLocation()
+
+    const initialRefreshAccessToken = async () => {
+        try {
+            setStateAuth({ isLoading: true, message: null, data: null })
+            const response = await axios.post(`${import.meta.env.VITE_BASE_URL}refresh-token`)
+            setIsAuth(true)
+            setUserConnected(response.data.data)
+            localStorage.setItem('accessToken', response.data.accessToken)
+            setStateAuth({ isLoading: false, message: response.data.message, data: response.data.data })
+        } catch (error) {
+            handleError(error, setStateAuth, addToast)
+        }
+    }
 
     const login = async (phoneField: field, passwordField: field) => {
         if (!phoneField.isValid || !passwordField.isValid) {
             return addToast({ toast: 'Merci de remplir correctement les formulaires.', type: 'error' })
         }
         try {
-            setStateAuth({ isLoading: true, message: null, data: null, errorMessage: null })
+            setStateAuth({ isLoading: true, message: null, data: null })
             const response = await axios.post(`${import.meta.env.VITE_BASE_URL}login`, { phone: phoneField.value, password: passwordField.value })
-            localStorage.setItem('token', response.data.token)
             setIsAuth(true)
-            setUser(response.data.data)
-            setStateAuth({ isLoading: false, message: response.data.message, data: response.data.data, errorMessage: null })
+            setUserConnected(response.data.data)
+            setStateAuth({ isLoading: false, message: response.data.message, data: response.data.data })
             addToast({ toast: response.data.message, type: 'success' })
             const from = location.state?.from || '/'
+            localStorage.setItem('accessToken', response.data.accessToken)
             if (from !== '/login' && from !== '/signup') navigate(from)
         } catch (error) {
             handleError(error, setStateAuth, addToast)
         }
     }
 
-    const logout = () => {
+    const logout = async () => {
         try {
-            setStateAuth({ isLoading: true, message: null, data: null, errorMessage: null })
-            localStorage.removeItem('token')
+            setStateAuth({ isLoading: true, message: null, data: null })
+            const response = await axios.post(`${import.meta.env.VITE_BASE_URL}logout`, { headers: { 'Authorization': `Bearer ${localStorage.getItem('accesToken')}` } })
             setIsAuth(false)
-            addToast({ toast: `Au revoir ${user?.pseudo}`, type: 'success' })
-            setUser(undefined)
+            setUserConnected(undefined)
+            setStateAuth({ isLoading: false, message: response.data.message, data: null })
             navigate('/login')
-            setStateAuth({ ...stateAuth, isLoading: false })
         } catch (error) {
             handleError(error, setStateAuth, addToast)
         }
@@ -71,25 +80,25 @@ export const useAuth = () => {
 
     return {
         isAuth,
+        stateAuth,
+        userConnected,
+        initialRefreshAccessToken,
         login,
-        logout,
-        user,
-        stateAuth
+        logout
     }
 }
 
 export const AuthContexProvider: FunctionComponent<PropsWithChildren> = ({ children }) => {
     const [isAuth, setIsAuth] = useState<boolean>(false)
-    const [user, setUser] = useState<User>()
+    const [userConnected, setUserConnected] = useState<User>()
     const [stateAuth, setStateAuth] = useState<stateAxios>({
         isLoading: false,
         message: null,
-        data: null,
-        errorMessage: null
+        data: null
     })
     return (
-        <Authcontext.Provider value={{ isAuth, setIsAuth, user, setUser, stateAuth, setStateAuth }} >
+        <AuthContext.Provider value={{ isAuth, setIsAuth, userConnected, setUserConnected, stateAuth, setStateAuth }} >
             {children}
-        </Authcontext.Provider>
+        </AuthContext.Provider>
     )
 }
