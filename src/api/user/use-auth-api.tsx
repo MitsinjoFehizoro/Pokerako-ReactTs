@@ -36,7 +36,7 @@ export const useAuth = () => {
     const initialRefreshAccessToken = async () => {
         try {
             setStateAuth({ isLoading: true, message: null, data: null })
-            const response = await axios.post(`${import.meta.env.VITE_BASE_URL}refresh-token`)
+            const response = await axios.post(`${import.meta.env.VITE_BASE_URL}refresh-token`, {}, { withCredentials: true })
             setIsAuth(true)
             setUserConnected(response.data.data)
             localStorage.setItem('accessToken', response.data.accessToken)
@@ -68,7 +68,7 @@ export const useAuth = () => {
     const logout = async () => {
         try {
             setStateAuth({ isLoading: true, message: null, data: null })
-            const response = await axios.post(`${import.meta.env.VITE_BASE_URL}logout`, { headers: { 'Authorization': `Bearer ${localStorage.getItem('accesToken')}` } })
+            const response = await axios.post(`${import.meta.env.VITE_BASE_URL}logout`, {}, { headers: { 'Authorization': `Bearer ${localStorage.getItem('accessToken')}` } })
             setIsAuth(false)
             setUserConnected(undefined)
             setStateAuth({ isLoading: false, message: response.data.message, data: null })
